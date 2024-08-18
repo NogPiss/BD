@@ -13,14 +13,14 @@ Begin
 end;
 /*
 Declare
--- com um declare dá pra declarar várias variáveis mas tem que separar elas por vírgula no final pondo e vírgula
+-- com um declare dï¿½ pra declarar vï¿½rias variï¿½veis mas tem que separar elas por vï¿½rgula no final pondo e vï¿½rgula
 	@n1 decimal(3,1) = 10,
 	@n2 decimal(3,1) = 5,
 	@res decimal(3,1);
 begin
--- o set é pra fazer conta 
+-- o set ï¿½ pra fazer conta 
 	set @res = @n1 + @n2;
--- se colocar o print sem o cast nao vira, pq o print não concatena texto com numero
+-- se colocar o print sem o cast nao vira, pq o print nï¿½o concatena texto com numero
 	print 'Somatoria = ' + Cast(@res as varchar);
 end;
  */
@@ -29,10 +29,10 @@ Declare
 	@n1 decimal(3,1) = 10,
 	@n2 decimal(3,1) = 5;
 Declare	
---da pra fazer isso tbm e não precisa colocar set
+--da pra fazer isso tbm e nï¿½o precisa colocar set
 	@res decimal(3,1) = @n1 * @n2;
 Begin
-	print 'Somatória = ' + CAST(@res as varchar);
+	print 'Somatï¿½ria = ' + CAST(@res as varchar);
 end;
 
 -- decisao
@@ -58,18 +58,18 @@ declare
 begin
 	 if @media >= 7
 		begin
-			print 'tá o crime';
+			print 'tï¿½ o crime';
 		end;
 	else
 		begin
-			print 'moiô, os bota chegô'
+			print 'moiï¿½, os bota chegï¿½'
 		end;
 end;
 
 
 --Exercicios BD com contas
 	
-	--salario mínimo mais 25%
+	--salario mï¿½nimo mais 25%
 
 declare
 	@salmin decimal(12,2) = 1412.00;
@@ -86,7 +86,7 @@ declare
 declare
 	@cambio decimal(7,2) = @dola * 5.1;
 begin
-	print 'o cambio é: ' +  cast(@cambio as varchar)
+	print 'o cambio ï¿½: ' +  cast(@cambio as varchar)
 end;
 
 	--valor parcelas carro
@@ -103,3 +103,45 @@ begin
 end;
 
 	
+
+		--valor parcelas carro2.0 
+
+declare
+	@marcelaseis decimal(12,2),
+    @marceladoze decimal(12,2),
+	@marceladezoito decimal(12,2),
+    @valortotal decimal(12,2) = 10000;
+begin
+	set @valortotal = @valortotal - @valortotal * 0.2;
+    set @marcelaseis = (@valortotal + @valortotal * 0.1) / 6
+    set @marceladoze = (@valortotal + @valortotal * 0.15) / 12
+    set @marceladezoito = (@valortotal + @valortotal * 0.20) / 18
+    print 'parcela do carro em 6x: ' + cast(@marcelaseis as varchar)       
+    print 'parcela do carro em 12x:' + cast(@marceladoze as varchar)
+    print 'parcela do carro e 18x: ' + cast(@marceladezoito as varchar)
+end;
+
+	--desconto de salario
+    
+declare 
+	@salario decimal(12,2) = 10000;
+declare
+    @salarioliquido decimal(12,2);
+BEGIN
+	if @salario <= 1313.69 
+    	begin
+    		set @salarioliquido =  @salario - @salario;
+    	end;
+    
+    if @salario >= 1313.70 and @salario <= 2625.12
+    	begin
+	    	set @salarioliquido = @salario - @salario * 0.15 ;
+   		end;
+    
+    if @salario > 2625.12 
+    	begin
+    		set @salarioliquido =  @salario - @salario * 0.27;
+ 	    end;
+    
+   	print 'o salario liquido para o salario inserido eh: ' + cast(@salarioliquido as varchar)
+end;
