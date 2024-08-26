@@ -145,3 +145,29 @@ BEGIN
     
    	print 'o salario liquido para o salario inserido eh: ' + cast(@salarioliquido as varchar)
 end;
+
+
+		--Exercicios em While
+
+	--1. fatorial
+		declare
+			@numeroEscolhido decimal(12,2) = 4;
+		declare
+			@fatorial decimal(12,2) = @numeroEscolhido;
+		declare
+			@contador decimal(4) = @numeroEscolhido ;
+		
+		while (@contador > 1)
+		begin
+			set @fatorial = @fatorial * (@contador - 1);
+			set @contador = @contador - 1;
+		end;
+		begin
+			print 'o fatorial do numero escolhido e: ' + cast(@fatorial as varchar)
+		end
+	
+	--2. 
+
+	--3
+	--4
+
