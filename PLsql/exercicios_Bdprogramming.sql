@@ -167,7 +167,56 @@ end;
 		end
 	
 	--2. 
+		declare
+			@pares decimal(12,2),
+			@counter decimal(12,2);
+
+		begin
+			set @counter = 0
+		end;
+		while (@counter <= 200)
+		begin
+			set @counter = @counter + 1
+			if (@counter % 2 = 0)
+				begin
+					print @counter
+				end;
+		end;
+
 
 	--3
+	declare
+	@counting decimal(12,2),
+	@Fibonacio decimal(12,2),
+	@casa1 decimal(12,2),
+	@casa2 decimal(12,2);
+	begin
+		set @counting = 0
+		set @casa1 = 1
+		set @casa2 = 0
+	end;
+	while (@counting <= 15)
+	begin
+		set @Fibonacio = @casa1 + @casa2
+		set @casa2 = @casa1
+		set @casa1 = @Fibonacio
+		set @counting = @counting + 1
+
+		print @Fibonacio
+	end;
+
+
 	--4
+	declare
+	@algarismo int = 169,
+	@resf int = 0;
+	while (@algarismo > 0)
+		begin
+			set @resf = @resf + @algarismo % 10
+			set @algarismo = @algarismo / 10	
+		end;
+	begin
+		print 'O resultado da soma é: ' + cast(@resf as varchar)
+	end;
+	--while ()
 
