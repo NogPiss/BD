@@ -38,40 +38,12 @@ CREATE TABLE ItensPedidos (
     FOREIGN KEY (produtos_produtoid) REFERENCES Produtos(produtoid)
 );
 
--- Inserir dados na tabela Clientes
-INSERT INTO Clientes (clienteid, nome_cliente, cidade, datacad)
-VALUES
-(1, 'João Silva', 'São Paulo', '2024-01-15'),
-(2, 'Maria Oliveira', 'Rio de Janeiro', '2024-02-20'),
-(3, 'Carlos Santos', 'Belo Horizonte', '2024-03-05');
-
--- Inserir dados na tabela Produtos
-INSERT INTO Produtos (produtoid, nome_produto, categoria_produto, preco_produto)
-VALUES
-(10, 'Produto A', 'Categoria 1', 100.00),
-(11, 'Produto B', 'Categoria 2', 200.00),
-(12, 'Produto C', 'Categoria 1', 150.00);
-
--- Inserir dados na tabela Pedidos
-INSERT INTO Pedidos (pedidoid, cliente_clienteid, datapedido, valortotal, descaplicado)
-VALUES
-(1001, 1, '2024-04-10', 1500.00, 'Desconto de 10% aplicado'),
-(1002, 2, '2024-04-15', 2000.00, 'Desconto de 5% aplicado'),
-(1003, 3, '2024-04-20', 1200.00, 'Nenhum desconto aplicado');
-
--- Inserir dados na tabela ItensPedidos
-INSERT INTO ItensPedidos (itemid, pedidos_pedidoid, produtos_produtoid, quantidade, preco_unitario)
-VALUES
-(1, 1001, 10, 3, 100.00),
-(2, 1001, 12, 2, 150.00),
-(3, 1002, 11, 5, 200.00),
-(4, 1003, 12, 1, 150.00);
 
 go
 
 --Exercício 1 - Consulta Clientes
 
-alter procedure ConsultaClientes
+CREATE procedure ConsultaClientes
 as
 BEGIN
 	select c.nome_cliente, c.cidade, 
@@ -96,7 +68,8 @@ go
 
 go
 
-create procedure AplicaDesconto
+
+create or alter procedure AplicaDesconto
 as
 Begin
 
@@ -119,6 +92,7 @@ Begin
 	where Pedidos.pedidoid = SubQuery.pedidoid
 
 	commit transaction
+
 end;
 
 go
@@ -143,3 +117,18 @@ end;
 exec interacao_produtos
 
 go
+
+--EXERCÍCIO 4
+
+create procedure RelatorioFinal
+as 
+Begin
+	select c.nome_cliente, p.datapedido, p.valortotal,
+	p.valortotal * p.descaplicado as ValorFinal, 
+	i.quantidade 
+	from Clientes c inner join 
+	Pedidos p on c.clienteid = p.cliente_clienteid inner join
+	ItensPedidos i on p.pedidoid = i.pedidos_pedidoid
+end;
+
+exec RelatorioFinal
