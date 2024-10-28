@@ -1,0 +1,319 @@
+test> use Blog
+switched to db Blog
+Blog> db.createcollection("artigo")
+TypeError: db.createcollection is not a function
+Blog> db.createCollection("artigo")
+{ ok: 1 }
+Blog> db.artigo.insertOne({titulo: "Teste", data: new Date(), texto: "Teste", url: "http//", status: 1})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f21bad39d641b6d86b01d')
+}
+Blog> db.createCollection("author")
+{ ok: 1 }
+Blog> db.author. insertOne({nome: "Jorge Doria", bio: "história", imagem : ".jpg"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2242d39d641b6d86b01e')
+}
+Blog> db.author. insertOne({nome: "Correx", bio: "Comédia", imagem : ".xml"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2265d39d641b6d86b01f')
+}
+Blog> db.author.find()
+[
+  {
+    _id: ObjectId('671f2242d39d641b6d86b01e'),
+    nome: 'Jorge Doria',
+    bio: 'história',
+    imagem: '.jpg'
+  },
+  {
+    _id: ObjectId('671f2265d39d641b6d86b01f'),
+    nome: 'Correx',
+    bio: 'Comédia',
+    imagem: '.xml'
+  }
+]
+Blog> db.author.find({nome: "Correx"})
+[
+  {
+    _id: ObjectId('671f2265d39d641b6d86b01f'),
+    nome: 'Correx',
+    bio: 'Comédia',
+    imagem: '.xml'
+  }
+]
+Blog> db.artigo.insertOne({titulo: "Poema sobre o dia de hoje", data: new Date(), texto: "O dia está muito cinza hoje", url: "http//", status: 0})
+{
+  acknowledged: true,
+Blog> db.artigo.insertOne({titulo: "Lençóis", data: new Date(), texto: "Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis", url: "http//", status: 1})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2658d39d641b6d86b021')
+}
+Blog> db.artigo.find()
+[
+  {
+    _id: ObjectId('671f21bad39d641b6d86b01d'),
+    titulo: 'Teste',
+    data: ISODate('2024-10-28T05:31:38.258Z'),
+    texto: 'Teste',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f23d3d39d641b6d86b020'),
+    titulo: 'Poema sobre o dia de hoje',
+    data: ISODate('2024-10-28T05:40:35.563Z'),
+    texto: 'O dia está muito cinza hoje',
+    url: 'http//',
+    status: 0
+  },
+  {
+    _id: ObjectId('671f2658d39d641b6d86b021'),
+    titulo: 'Lençóis',
+    data: ISODate('2024-10-28T05:51:20.683Z'),
+    texto: 'Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis',
+    url: 'http//',
+    status: 1
+  }
+]
+Blog> db.artigo.find({status : 1})
+[
+  {
+    _id: ObjectId('671f21bad39d641b6d86b01d'),
+    titulo: 'Teste',
+    data: ISODate('2024-10-28T05:31:38.258Z'),
+    texto: 'Teste',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f2658d39d641b6d86b021'),
+    titulo: 'Lençóis',
+    data: ISODate('2024-10-28T05:51:20.683Z'),
+    texto: 'Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis',
+    url: 'http//',
+    status: 1
+  }
+]
+Blog> db.artigo.insertOne({titulo: "Lado Certo", data: new Date(), texto: "Não importa o dia, o que cê fala pra mim pesa", url: "http//", status: 1})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2780d39d641b6d86b022')
+}
+Blog> Gostaria de conversar sobre os pesos que carrego
+Uncaught:
+SyntaxError: Missing semicolon. (1:8)
+
+> 1 | Gostaria de conversar sobre os pesos que carrego
+    |         ^
+  2 |
+
+Blog> db.artigo.find()
+[
+  {
+    _id: ObjectId('671f21bad39d641b6d86b01d'),
+    titulo: 'Teste',
+    data: ISODate('2024-10-28T05:31:38.258Z'),
+    texto: 'Teste',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f23d3d39d641b6d86b020'),
+    titulo: 'Poema sobre o dia de hoje',
+    data: ISODate('2024-10-28T05:40:35.563Z'),
+    texto: 'O dia está muito cinza hoje',
+    url: 'http//',
+    status: 0
+  },
+  {
+    _id: ObjectId('671f2658d39d641b6d86b021'),
+    titulo: 'Lençóis',
+    data: ISODate('2024-10-28T05:51:20.683Z'),
+    texto: 'Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f2780d39d641b6d86b022'),
+    titulo: 'Lado Certo',
+    data: ISODate('2024-10-28T05:56:16.664Z'),
+    texto: 'Não importa o dia, o que cê fala pra mim pesa',
+    url: 'http//',
+    status: 1
+  }
+]
+Blog> db.artigo.updateOne({titulo : 'Lado Certo'}, {$set:{titulo: 'Lado Certo', data: new Date(), texto: 'Não importa o dia o que cê fala pra mim pesa, gostaria de conversar sobre os pesos que carrego, porque eu sempre estive do seu lado e eu não sei se era o lado certo', url: "http//", status: 1}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Blog> db.artigo.find()
+[
+  {
+    _id: ObjectId('671f21bad39d641b6d86b01d'),
+    titulo: 'Teste',
+    data: ISODate('2024-10-28T05:31:38.258Z'),
+    texto: 'Teste',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f23d3d39d641b6d86b020'),
+    titulo: 'Poema sobre o dia de hoje',
+    data: ISODate('2024-10-28T05:40:35.563Z'),
+    texto: 'O dia está muito cinza hoje',
+    url: 'http//',
+    status: 0
+  },
+  {
+    _id: ObjectId('671f2658d39d641b6d86b021'),
+    titulo: 'Lençóis',
+    data: ISODate('2024-10-28T05:51:20.683Z'),
+    texto: 'Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f2780d39d641b6d86b022'),
+    titulo: 'Lado Certo',
+    data: ISODate('2024-10-28T06:03:48.925Z'),
+    texto: 'Não importa o dia o que cê fala pra mim pesa, gostaria de conversar sobre os pesos que carrego, porque eu sempre estive do seu lado e eu não sei se era o lado certo',
+    url: 'http//',
+    status: 1
+  }
+]
+Blog> db.artigo.find({titulo: "Lado Certo"})
+[
+  {
+    _id: ObjectId('671f2780d39d641b6d86b022'),
+    titulo: 'Lado Certo',
+    data: ISODate('2024-10-28T06:03:48.925Z'),
+    texto: 'Não importa o dia o que cê fala pra mim pesa, gostaria de conversar sobre os pesos que carrego, porque eu sempre estive do seu lado e eu não sei se era o lado certo',
+    url: 'http//',
+    status: 1
+  }
+]
+Blog> db.artigo.find({status: {$gte: 0}})
+[
+  {
+    _id: ObjectId('671f21bad39d641b6d86b01d'),
+    titulo: 'Teste',
+    data: ISODate('2024-10-28T05:31:38.258Z'),
+    texto: 'Teste',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f23d3d39d641b6d86b020'),
+    titulo: 'Poema sobre o dia de hoje',
+    data: ISODate('2024-10-28T05:40:35.563Z'),
+    texto: 'O dia está muito cinza hoje',
+    url: 'http//',
+    status: 0
+  },
+  {
+    _id: ObjectId('671f2658d39d641b6d86b021'),
+    titulo: 'Lençóis',
+    data: ISODate('2024-10-28T05:51:20.683Z'),
+    texto: 'Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis',
+    url: 'http//',
+    status: 1
+  },
+  {
+    _id: ObjectId('671f2780d39d641b6d86b022'),
+    titulo: 'Lado Certo',
+    data: ISODate('2024-10-28T06:03:48.925Z'),
+    texto: 'Não importa o dia o que cê fala pra mim pesa, gostaria de conversar sobre os pesos que carrego, porque eu sempre estive do seu lado e eu não sei se era o lado certo',
+    url: 'http//',
+    status: 1
+  }
+]
+Blog> db.author.insertOne({nome: "Lucas Enzo", bio: "Mangá", imagem: ".jpg", idade : 30})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2b64d39d641b6d86b023')
+}
+Blog> db.author.insertOne({nome: "Eduardo P. Queiroz", bio: "Romance", imagem: ".jpg", idade : 18})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2b9ed39d641b6d86b024')
+}
+Blog> db.author.insertOne({nome: "Correx", bio: "Terror", imagem: ".jpg", idade : 25})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2bc9d39d641b6d86b025')
+}
+Blog> db.author.deleteOne({nome: "Correx", bio: "Terror", imagem: ".jpg", idade : 25})
+{ acknowledged: true, deletedCount: 1 }
+Blog> db.author.insertOne({nome: "Patrik", bio: "Terror", imagem: ".jpg", idade : 25})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2c30d39d641b6d86b026')
+}
+Blog> db.author.insertOne({nome: "Jorge", bio: "Romance", imagem: ".jpg", idade : 16})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2c54d39d641b6d86b027')
+}
+Blog> db.author.insertOne({nome: "Pedro", bio: "Comédia", imagem: ".jpg", idade : 17})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2c71d39d641b6d86b028')
+}
+Blog> db.author.find({idade: {$gte: 18}})
+[
+  {
+    _id: ObjectId('671f2b64d39d641b6d86b023'),
+    nome: 'Lucas Enzo',
+    bio: 'Mangá',
+    imagem: '.jpg',
+    idade: 30
+  },
+  {
+    _id: ObjectId('671f2b9ed39d641b6d86b024'),
+    nome: 'Eduardo P. Queiroz',
+    bio: 'Romance',
+    imagem: '.jpg',
+    idade: 18
+  },
+  {
+    _id: ObjectId('671f2c30d39d641b6d86b026'),
+    nome: 'Patrik',
+    bio: 'Terror',
+    imagem: '.jpg',
+    idade: 25
+  }
+]
+Blog> db.author.find({idade: {$lt: 18}})
+[
+  {
+    _id: ObjectId('671f2c54d39d641b6d86b027'),
+    nome: 'Jorge',
+    bio: 'Romance',
+    imagem: '.jpg',
+    idade: 16
+  },
+  {
+    _id: ObjectId('671f2c71d39d641b6d86b028'),
+    nome: 'Pedro',
+    bio: 'Comédia',
+    imagem: '.jpg',
+    idade: 17
+  }
+]
+Blog> db.artigo.insertOne({titulo: "Arrependida", data : new Date(), texto: "Ela veio arrependia, sentou no meu colo estava de calça comprida, disse que fases são apenas fases, ela nao reclamou então fazemos pazes", url: "http//", status: 0})
+{
+  acknowledged: true,
+  insertedId: ObjectId('671f2f07d39d641b6d86b029')
+}
+Blog> db.createCollection("Categoria")
+{ ok: 1 }
+Blog> db.Categora.insertOne({})
