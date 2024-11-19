@@ -1,0 +1,239 @@
+1. consultar os autores maiores de idade
+
+Blog> db.Autor.find({idade:{$gte: 18}})
+[
+  {
+    _id: ObjectId('671f2b64d39d641b6d86b023'),
+    nome: 'Lucas Enzo',
+    bio: 'Mangá',
+    imagem: '.jpg',
+    idade: 30
+  },
+  {
+    _id: ObjectId('671f2b9ed39d641b6d86b024'),
+    nome: 'Eduardo P. Queiroz',
+    bio: 'Romance',
+    imagem: '.jpg',
+    idade: 18
+  },
+  {
+    _id: ObjectId('671f2c30d39d641b6d86b026'),
+    nome: 'Patrik',
+    bio: 'Terror',
+    imagem: '.jpg',
+    idade: 25
+  },
+  {
+    _id: ObjectId('673bc9e28054bb1d0486b01d'),
+    nome: 'Gordura',
+    bio: 'Terror',
+    imagem: '.img',
+    idade: 35
+  },
+  {
+    _id: ObjectId('673bd32ea76e1e527b86b01e'),
+    nome: 'Big Rush',
+    bio: null,
+    imagem: '.tiff',
+    idade: 23
+  }
+]
+
+2. consultar os autores menores de idade
+
+Blog> db.Autor.find({idade:{$lt: 18}})
+[
+  {
+    _id: ObjectId('671f2c54d39d641b6d86b027'),
+    nome: 'Jorge',
+    bio: 'Romance',
+    imagem: '.jpg',
+    idade: 16
+  },
+  {
+    _id: ObjectId('671f2c71d39d641b6d86b028'),
+    nome: 'Pedro',
+    bio: 'Comédia',
+    imagem: '.jpg',
+    idade: 17
+  }
+]
+
+3. consultar os autores que terminem com a letra 'x'
+
+Blog> db.Autor.find({nome:{$regex:"x$"}})
+[
+  {
+    _id: ObjectId('671f2265d39d641b6d86b01f'),
+    nome: 'Correx',
+    bio: 'Comédia',
+    imagem: '.xml'
+  }
+]
+
+4. consultar o status os documentos que são "0"
+
+Blog> db.Artigo.find({status: 0})
+[
+  {
+    _id: ObjectId('671f23d3d39d641b6d86b020'),
+    titulo: 'Poema sobre o dia de hoje',
+    data: ISODate('2024-10-28T05:40:35.563Z'),
+    url: 'http//',
+    status: 0,
+    conteudo: 'O dia está muito cinza hoje'
+  },
+  {
+    _id: ObjectId('671f2f07d39d641b6d86b029'),
+    titulo: 'Arrependida',
+    data: ISODate('2024-10-28T06:28:23.564Z'),
+    url: 'http//',
+    status: 0,
+    conteudo: 'Ela veio arrependia, sentou no meu colo estava de calça comprida, disse que fases são apenas fases, ela nao reclamou então fazemos pazes'
+  }
+]
+
+5. consultar quantos artigos existem desconsiderando o artigo com o título "Lençóis"
+
+Blog> db.Artigo.find({titulo: {$ne:"Lençóis"}}).count()
+5
+
+6. consultar se existe um autor com o nome "Borex" ou com idade igual a 23
+
+Blog> db.Autor.find({$or:[{nome: "Borex"},{idade: 23}]})
+[
+  {
+    _id: ObjectId('673bd32ea76e1e527b86b01e'),
+    nome: 'Big Rush',
+    bio: null,
+    imagem: '.tiff',
+    idade: 23
+  }
+]
+
+7. consultar quantos campos "data de nasc." não existem na coleção "Autor"
+
+Blog> db.Autor.find({data_nasc: {$exists: false}}).count()
+9
+
+8. consultar autores que não possuem uma idade maior que 20
+
+Blog> db.Autor.find({idade:{$not:{$gt: 20}}})
+[
+  {
+    _id: ObjectId('671f2242d39d641b6d86b01e'),
+    nome: 'Jorge Doria',
+    bio: 'história',
+    imagem: '.jpg'
+  },
+  {
+    _id: ObjectId('671f2265d39d641b6d86b01f'),
+    nome: 'Correx',
+    bio: 'Comédia',
+    imagem: '.xml'
+  },
+  {
+    _id: ObjectId('671f2b9ed39d641b6d86b024'),
+    nome: 'Eduardo P. Queiroz',
+    bio: 'Romance',
+    imagem: '.jpg',
+    idade: 18
+  },
+  {
+    _id: ObjectId('671f2c54d39d641b6d86b027'),
+    nome: 'Jorge',
+    bio: 'Romance',
+    imagem: '.jpg',
+    idade: 16
+  },
+  {
+    _id: ObjectId('671f2c71d39d641b6d86b028'),
+    nome: 'Pedro',
+    bio: 'Comédia',
+    imagem: '.jpg',
+    idade: 17
+  }
+]
+
+9. consultar os todos artigos que existem em exceção ao Artigo com o nome "Me apressei"
+
+Blog> db.Artigo.find({titulo: {$ne: "Me apressei"}})
+[
+  {
+    _id: ObjectId('671f21bad39d641b6d86b01d'),
+    titulo: 'Teste',
+    data: ISODate('2024-10-28T05:31:38.258Z'),
+    url: 'http//',
+    status: 1,
+    conteudo: 'Teste'
+  },
+  {
+    _id: ObjectId('671f23d3d39d641b6d86b020'),
+    titulo: 'Poema sobre o dia de hoje',
+    data: ISODate('2024-10-28T05:40:35.563Z'),
+    url: 'http//',
+    status: 0,
+    conteudo: 'O dia está muito cinza hoje'
+  },
+  {
+    _id: ObjectId('671f2658d39d641b6d86b021'),
+    titulo: 'Lençóis',
+    data: ISODate('2024-10-28T05:51:20.683Z'),
+    url: 'http//',
+    status: 1,
+    conteudo: 'Só me promete que vai estar aqui ao despertar, isso me deixa mais tranquilo eu consigo sonhar eu sempre leio o que você escreve com sua voz dias passaram e seu cheiro não saiu dos lençóis'
+  },
+  {
+    _id: ObjectId('671f2780d39d641b6d86b022'),
+    titulo: 'Lado Certo',
+    data: ISODate('2024-10-28T06:03:48.925Z'),
+    url: 'http//',
+    status: 1,
+    conteudo: 'Não importa o dia o que cê fala pra mim pesa, gostaria de conversar sobre os pesos que carrego, porque eu sempre estive do seu lado e eu não sei se era o lado certo'
+  },
+  {
+    _id: ObjectId('671f2f07d39d641b6d86b029'),
+    titulo: 'Arrependida',
+    data: ISODate('2024-10-28T06:28:23.564Z'),
+    url: 'http//',
+    status: 0,
+    conteudo: 'Ela veio arrependia, sentou no meu colo estava de calça comprida, disse que fases são apenas fases, ela nao reclamou então fazemos pazes'
+  }
+]
+
+10. consultar os documentos que existem as palavras "você" e "sair" no campo "conteudo" da coleção "Artigo"
+
+Blog> db.Artigo.find({$and: [{conteudo: {$regex: "você"}},{conteudo: {$regex: "sair"}}]})
+[
+  {
+    _id: ObjectId('673bd1d9a76e1e527b86b01d'),
+    titulo: 'Me apressei',
+    data: ISODate('2024-11-18T23:46:33.555Z'),
+    url: 'http://',
+    status: 1,
+    conteudo: 'Percebeu que eu me apressei pra sair daqui? Eu não sou o mesmo e agora nao consigo mais mentir, se eu for sincero só espero que isso não te machuque, porque eu já me acostumei a lidar com a rejeição, mas você não aguentaria ouvir de mim um não, Aguarde a continuação'
+  }
+]
+
+
+
+
+
+
+Exclusões e alterações:
+
+Excluindo o documento de teste criado no começo do projeto
+
+Blog> db.Artigo.deleteOne({conteudo: "Teste"})
+{ acknowledged: true, deletedCount: 1 }
+
+Alterando o nome do campo "bio" da coleção "Autor"
+
+Blog> db.Autor.updateMany({},{$rename: {"bio": "genero_que_escreve"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 9,
+  modifiedCount: 8,
+  upsertedCount: 0
+}

@@ -1,0 +1,23 @@
+consultas possíveis:
+
+1. consultar os autores maiores de idade
+
+2. consultar os autores menores de idade
+
+3. consultar os autores que terminem com a letra 'x'
+
+4. consultar o status os documentos que possuem o status "0"
+
+5. consultar quantos artigos existem desconsiderando o artigo "Lençóis"
+
+6. consultar se existe um autor com o nome "Borex" ou com idade igual a 23
+
+7. consultar quantos campos "data de nasc." não existem na coleção "Autor"
+
+8. consultar autores que não possuem uma idade maior que 20
+
+9. consultar os todos artigos que existem em exceção ao Artigo com o nome "Me apressei"
+
+10. consultar os documentos que existem as palavras "você" e "sair" no campo "conteudo" da coleção "Artigo"
+
+Exclusões e alterações: Excluir o artigo de Teste e alterar o nome de algum campo da coleção "Autor"
